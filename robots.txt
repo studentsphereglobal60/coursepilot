@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://studentsphereglobal60.github.io/coursepilot/sitemap.xml
