@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://studentsphereglobal60.github.io/coursepilot/</loc>
-  </url>
+  <url><loc>https://studentsphereglobal60.github.io/coursepilot/</loc></url>
+  <url><loc>https://studentsphereglobal60.github.io/coursepilot/guides/first-python-course.html</loc></url>
+  <url><loc>https://studentsphereglobal60.github.io/coursepilot/guides/ai-course-checklist.html</loc></url>
+  <url><loc>https://studentsphereglobal60.github.io/coursepilot/guides/excel-sql-python.html</loc></url>
+  <url><loc>https://studentsphereglobal60.github.io/coursepilot/guides/beginner-cybersecurity-course.html</loc></url>
 </urlset>
