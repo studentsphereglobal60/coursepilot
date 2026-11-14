@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5 Python Automation Projects for Beginners | CoursePilot</title>
+<meta name="description" content="Build five beginner Python automation projects: organize test files, clean CSV data, rename files safely and automate simple tasks.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://studentsphereglobal60.github.io/coursepilot/guides/python-mini-projects.html">
+<meta name="theme-color" content="#090b10">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"5 Python Automation Projects for Beginners","description":"Five safe, practical Python automation projects for beginners.","mainEntityOfPage":{"@type":"WebPage","@id":"https://studentsphereglobal60.github.io/coursepilot/guides/python-mini-projects.html"},"publisher":{"@type":"Organization","name":"CoursePilot","url":"https://studentsphereglobal60.github.io/coursepilot/"}}
+</script>
+<style>
+:root{color-scheme:dark;--bg:#090b10;--panel:#11151e;--text:#f4f6fb;--muted:#a6afc0;--line:#283142;--accent:#8b7cff;--mint:#5de0c0}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.75 system-ui,Arial,sans-serif}.wrap{width:min(820px,92%);margin:auto}header,footer{border-bottom:1px solid var(--line);padding:18px 0}footer{border-top:1px solid var(--line);border-bottom:0;margin-top:50px;color:var(--muted)}a{color:var(--mint)}.brand{font-weight:800;color:var(--text);text-decoration:none;font-size:1.2rem}.brand span{color:var(--accent)}main{padding:42px 0 20px}.crumb{color:var(--muted);font-size:.9rem}h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.15;letter-spacing:-1px;margin:16px 0}h2{margin-top:34px;line-height:1.3}h3{margin-bottom:6px}p,li{color:#c4ccda}.intro{font-size:1.12rem;color:var(--muted)}.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin:24px 0}.tag{color:var(--mint);font-size:.8rem;text-transform:uppercase;letter-spacing:1px;font-weight:700}.links{display:flex;gap:16px;flex-wrap:wrap}table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.94rem}td,th{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}th{background:var(--panel)}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="brand" href="../">Course<span>Pilot</span></a></div></header>
+<main class="wrap">
+<p class="crumb"><a href="../">Home</a> / Learning Guides / Programming</p>
+<span class="tag">Python · Automation · Beginner guide</span>
+<h1>5 Python Automation Projects for Beginners</h1>
+<p class="intro">Python automation means using a program to repeat a task that would otherwise take several manual steps. You do not need advanced programming to begin. These five small projects introduce useful ideas while keeping the practice safe and manageable.</p>
+<div class="panel"><strong>Before you begin</strong><p>Learn variables, strings, lists, if/else conditions, loops and functions. You should also know how to run a Python file. Start with a disposable test folder and sample files. Do not run file-moving scripts on important personal or work folders until you understand exactly what they will change.</p><p>If you are new to Python, first read <a href="first-python-course.html">how to choose your first Python course</a>. For more beginner exercises, see <a href="python-projects-for-beginners.html">10 Python projects for beginners</a>.</p></div>
+
+<h2>At a glance: choose a mini project</h2>
+<table><thead><tr><th>Project</th><th>Skills</th><th>Difficulty</th></tr></thead><tbody>
+<tr><td>1. File extension reporter</td><td>Paths, loops, dictionaries</td><td>Beginner</td></tr>
+<tr><td>2. CSV data checker</td><td>CSV, conditions, data cleaning</td><td>Beginner</td></tr>
+<tr><td>3. Batch file renamer (preview only first)</td><td>Strings, paths, validation</td><td>Beginner–intermediate</td></tr>
+<tr><td>4. Text file search tool</td><td>File reading, search, error handling</td><td>Beginner</td></tr>
+<tr><td>5. Repeated task checklist generator</td><td>Functions, dates, file writing</td><td>Beginner</td></tr>
+</tbody></table>
+
+<h2>1. File extension reporter</h2>
+<p><strong>What it does:</strong> Looks through a test folder and counts how many files have each extension, such as .txt, .pdf or .jpg. The first version only reports results; it does not move or delete anything.</p>
+<p><strong>What you practise:</strong> Listing files, reading file suffixes, loops and dictionaries.</p>
+<p><strong>Build it step by step:</strong></p>
+<ol><li>Create a new folder named <code>sample_files</code> and add a few harmless test files with different extensions.</li><li>Use Python's <code>pathlib</code> module to list the files in that folder.</li><li>Read each file's suffix and increase a counter for that extension.</li><li>Print a summary such as “.txt: 3 files” and “.pdf: 2 files”.</li></ol>
+<p><strong>Improve it:</strong> Include files with no extension in an “other” category and sort the report by count.</p>
+
+<h2>2. CSV data checker</h2>
+<p><strong>What it does:</strong> Checks a small CSV file for blank cells in selected columns and reports how many rows may need attention. It does not overwrite the original file.</p>
+<p><strong>What you practise:</strong> Reading CSV files, loops, conditions, basic data quality checks and writing a report.</p>
+<p><strong>Build it step by step:</strong></p>
+<ol><li>Create a small fictional CSV with columns such as <code>date</code>, <code>category</code> and <code>amount</code>.</li><li>Read it with Python's built-in <code>csv</code> module.</li><li>Check whether required fields are blank and whether amount values can be converted to numbers.</li><li>Print the row numbers that need review and save a separate summary report.</li></ol>
+<p><strong>Improve it:</strong> Add checks for duplicate IDs or dates that do not match the expected format. Use fictional data rather than private customer information.</p>
+
+<h2>3. Batch file renamer—with a preview first</h2>
+<p><strong>What it does:</strong> Suggests a consistent naming pattern for files in a test folder, for example changing <code>photo 1.jpg</code> to <code>trip-001.jpg</code>. A safe first version displays proposed changes without renaming anything.</p>
+<p><strong>What you practise:</strong> String methods, numbering, paths and input validation.</p>
+<p><strong>Build it step by step:</strong></p>
+<ol><li>Make copies of a few sample files in a disposable folder.</li><li>Generate a proposed new name for each file.</li><li>Print the old and proposed names in a clear preview table.</li><li>Check for duplicate target names and invalid characters.</li><li>Only after testing, add an optional rename step and keep a record of every change.</li></ol>
+<p><strong>Improve it:</strong> Add a confirmation prompt and a way to reverse changes using the saved mapping. Never test first on your Downloads folder or work documents.</p>
+
+<h2>4. Search text files for a phrase</h2>
+<p><strong>What it does:</strong> Searches a folder of sample text files for a word or phrase and reports which files contain it.</p>
+<p><strong>What you practise:</strong> Opening text files, reading lines, case-insensitive matching and handling missing or unreadable files.</p>
+<p><strong>Build it step by step:</strong></p>
+<ol><li>Create a folder containing several short sample <code>.txt</code> files.</li><li>Ask the user for a search phrase.</li><li>Read each file one at a time and check whether the phrase appears.</li><li>Print the file name and matching line number, without changing the file.</li></ol>
+<p><strong>Improve it:</strong> Add a count of matches per file or allow the user to search for more than one phrase.</p>
+
+<h2>5. Repeated task checklist generator</h2>
+<p><strong>What it does:</strong> Creates a dated checklist from a short list of recurring tasks, such as “review notes”, “back up practice files” or “check project progress”.</p>
+<p><strong>What you practise:</strong> Functions, lists, date formatting and writing text files.</p>
+<p><strong>Build it step by step:</strong></p>
+<ol><li>Store a few generic tasks in a Python list.</li><li>Use the <code>datetime</code> module to get today's date.</li><li>Write the date and task list to a new text file.</li><li>Make sure the program creates a new file name rather than overwriting an earlier checklist.</li></ol>
+<p><strong>Improve it:</strong> Let the user add or remove tasks before generating the checklist.</p>
+
+<h2>How to make an automation project reliable</h2>
+<ul>
+<li><strong>Start with read-only behaviour.</strong> Print what the script would do before allowing it to change files.</li>
+<li><strong>Use test data.</strong> Work in a temporary folder with copies, not valuable originals.</li>
+<li><strong>Handle errors.</strong> Consider missing files, blank values, unexpected formats and permission problems.</li>
+<li><strong>Keep a log.</strong> Record what the script checked or changed so you can review its behaviour.</li>
+<li><strong>Make it repeatable.</strong> Running the program twice should not unexpectedly duplicate, overwrite or damage data.</li>
+<li><strong>Explain the result.</strong> Write a short README describing the problem, how to run the script and its limitations.</li>
+</ul>
+
+<h2>What should you learn next?</h2>
+<p>After one project works, choose a direction. For data tasks, practise CSV files and then SQL. For more advanced automation, learn how APIs work and how to handle credentials safely—never place passwords or secret API keys in public code. For a broader learning route, compare <a href="excel-sql-python.html">Excel, SQL and Python</a>.</p>
+<p>If you want a structured way to learn programming, our <a href="best-free-coding-courses.html">free coding courses guide</a> compares beginner learning options. Before paying for a course, check its actual exercises, prerequisites, update history and refund terms.</p>
+
+<h2>Frequently asked questions</h2>
+<h3>Is Python automation suitable for a complete beginner?</h3>
+<p>Yes, if you begin with small read-only scripts and already understand basic Python syntax. Start with a file reporter or text search tool before attempting scripts that rename or move files.</p>
+<h3>Do I need to install extra Python libraries?</h3>
+<p>Not for the first versions of these projects. They can be built with Python's standard library, including pathlib, csv and datetime. Extra packages may be useful later, but check their documentation and installation requirements.</p>
+<h3>Can I automate tasks on someone else's computer or website?</h3>
+<p>Only when you have clear permission and follow the service's rules. Do not automate logins, scrape private information, bypass access controls or send unsolicited messages.</p>
+<h3>How can I show these projects in a portfolio?</h3>
+<p>Publish a clean code repository with a README, sample input, sample output and a brief explanation of what you learned. Remove private data, passwords, API keys and personal file paths before sharing.</p>
+
+<div class="panel"><strong>CoursePilot takeaway</strong><p>A good beginner automation project is small, safe and easy to explain. Build the read-only version first, test it with sample data and add changes only when you can predict their effects.</p></div>
+<div class="links"><a href="python-projects-for-beginners.html">More beginner Python projects →</a><a href="first-python-course.html">Choose a Python course →</a><a href="../">Back to CoursePilot</a></div>
+<p class="crumb">CoursePilot is an independent learning-guidance project. Some site links may be affiliate links; see our <a href="../#disclosure">affiliate disclosure</a>.</p>
+</main>
+<footer><div class="wrap">© CoursePilot · <a href="../">Home</a></div></footer>
+</body>
+</html>
