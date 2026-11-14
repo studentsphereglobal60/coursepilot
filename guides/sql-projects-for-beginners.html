@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7 Beginner SQL Projects to Practise Database Skills | CoursePilot</title>
+<meta name="description" content="Build practical SQL skills with 7 beginner projects. Practise SELECT, WHERE, JOIN, GROUP BY and data cleaning using clear project briefs and example queries.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://studentsphereglobal60.github.io/coursepilot/guides/sql-projects-for-beginners.html">
+<meta name="theme-color" content="#090b10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="7 Beginner SQL Projects to Practise Database Skills">
+<meta property="og:description" content="Seven practical SQL projects with learning goals, example queries and portfolio tips for beginners.">
+<meta property="og:url" content="https://studentsphereglobal60.github.io/coursepilot/guides/sql-projects-for-beginners.html">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"7 Beginner SQL Projects to Practise Database Skills","description":"Seven practical SQL projects with learning goals, example queries and portfolio tips for beginners.","mainEntityOfPage":{"@type":"WebPage","@id":"https://studentsphereglobal60.github.io/coursepilot/guides/sql-projects-for-beginners.html"},"publisher":{"@type":"Organization","name":"CoursePilot","url":"https://studentsphereglobal60.github.io/coursepilot/"},"datePublished":"2026-11-15","dateModified":"2026-11-15"}
+</script>
+<style>
+:root{color-scheme:dark;--bg:#090b10;--panel:#11151e;--text:#f4f6fb;--muted:#a6afc0;--line:#283142;--accent:#8b7cff;--mint:#5de0c0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.75 system-ui,Arial,sans-serif}.wrap{width:min(820px,92%);margin:auto}header,footer{border-bottom:1px solid var(--line);padding:18px 0}footer{border-top:1px solid var(--line);border-bottom:0;margin-top:50px;color:var(--muted)}a{color:var(--mint)}.brand{font-weight:800;color:var(--text);text-decoration:none;font-size:1.2rem}.brand span{color:var(--accent)}main{padding:42px 0 20px}.crumb{color:var(--muted);font-size:.9rem}h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.15;letter-spacing:-1px;margin:16px 0}h2{margin-top:36px;line-height:1.3}h3{margin:24px 0 7px}p,li{color:#c4ccda}.intro{font-size:1.12rem;color:var(--muted)}.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin:24px 0}.tag{color:var(--mint);font-size:.8rem;text-transform:uppercase;letter-spacing:1px;font-weight:700}.note{font-size:.9rem;color:var(--muted)}pre{overflow-x:auto;background:#07090e;border:1px solid var(--line);border-radius:10px;padding:15px;color:#d9e1f2;font-size:.88rem;line-height:1.55}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.92rem}td,th{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}th{background:var(--panel)}.links{display:flex;gap:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="brand" href="../">Course<span>Pilot</span></a></div></header>
+<main class="wrap">
+<p class="crumb"><a href="../">Home</a> / Learning Guides / Data Analytics</p>
+<span class="tag">Data Analytics · Beginner project guide</span>
+<h1>7 Beginner SQL Projects to Practise Database Skills</h1>
+<p class="intro">The fastest way to make SQL feel useful is to ask questions of data. These seven projects take you from simple filtering to joins, summaries and data-quality checks. You can build them with a local database or a browser-based SQL practice tool—no paid software is required for the learning exercises.</p>
+<div class="panel"><strong>Before you start</strong>
+<ul><li>Know the basics of <code>SELECT</code>, <code>WHERE</code> and <code>ORDER BY</code>. If you are completely new, try the free interactive <a href="https://sqlbolt.com/" target="_blank" rel="noopener">SQLBolt lessons</a> first.</li>
+<li>Use fictional, public or properly licensed sample data. Never upload private customer, student, employer or financial records to a public playground or portfolio.</li>
+<li>Examples below use conventional SQL syntax. Date functions and a few details can vary between SQLite, PostgreSQL, MySQL and SQL Server, so check the documentation for the database you choose.</li></ul>
+</div>
+
+<h2>What you will practise</h2>
+<table><thead><tr><th>Project</th><th>Main SQL skills</th><th>Beginner outcome</th></tr></thead><tbody>
+<tr><td>1. Personal library</td><td>SELECT, WHERE, ORDER BY</td><td>Find books and track loans</td></tr>
+<tr><td>2. Student results</td><td>COUNT, AVG, GROUP BY</td><td>Summarise class performance</td></tr>
+<tr><td>3. Shop inventory</td><td>CASE, GROUP BY, joins</td><td>Spot low-stock products</td></tr>
+<tr><td>4. Online store orders</td><td>JOIN, SUM, aggregation</td><td>Calculate sales by product</td></tr>
+<tr><td>5. Support tickets</td><td>Dates, CASE, grouping</td><td>Measure response workload</td></tr>
+<tr><td>6. Website activity</td><td>Filtering, grouping, joins</td><td>Understand visits and events</td></tr>
+<tr><td>7. Data quality audit</td><td>NULL, duplicates, validation</td><td>Find records needing review</td></tr>
+</tbody></table>
+
+<h2>1. Personal library database</h2>
+<p><strong>Scenario:</strong> A small community library wants to keep track of books and which members have borrowed them. Create two tables: <code>books</code> (book_id, title, author, category, published_year) and <code>loans</code> (loan_id, book_id, member_name, loan_date, return_date).</p>
+<p><strong>Try these questions:</strong> Which books were published after 2015? Which books are currently on loan? How many books are there in each category?</p>
+<pre><code>SELECT title, author
+FROM books
+WHERE published_year &gt; 2015
+ORDER BY title;
+
+SELECT category, COUNT(*) AS book_count
+FROM books
+GROUP BY category
+ORDER BY book_count DESC;</code></pre>
+<p><strong>Skills:</strong> selecting columns, filtering rows, sorting and basic aggregation. <strong>Extension:</strong> join books to loans to show each borrowed title and its return status.</p>
+
+<h2>2. Student results summary</h2>
+<p><strong>Scenario:</strong> Use synthetic student and assessment tables. The <code>students</code> table contains student_id and student_name; the <code>assessments</code> table contains assessment_id, student_id, subject and score.</p>
+<p><strong>Try these questions:</strong> What is the average score in each subject? How many assessment records are below 50? Which students have more than one assessment?</p>
+<pre><code>SELECT subject,
+       ROUND(AVG(score), 1) AS average_score,
+       COUNT(*) AS assessment_count
+FROM assessments
+GROUP BY subject
+ORDER BY average_score DESC;
+
+SELECT student_id, COUNT(*) AS attempts
+FROM assessments
+GROUP BY student_id
+HAVING COUNT(*) &gt; 1;</code></pre>
+<p><strong>Skills:</strong> <code>AVG</code>, <code>COUNT</code>, <code>GROUP BY</code> and <code>HAVING</code>. <strong>Extension:</strong> join the two tables to display student names. Keep the data fictional; real student records are sensitive.</p>
+
+<h2>3. Shop inventory tracker</h2>
+<p><strong>Scenario:</strong> A small shop has a <code>products</code> table with product_id, product_name, category, unit_price and stock_quantity.</p>
+<p><strong>Try these questions:</strong> Which products have fewer than 10 units left? What is the estimated value of stock in each category? Which products need reordering?</p>
+<pre><code>SELECT product_name, stock_quantity
+FROM products
+WHERE stock_quantity &lt; 10
+ORDER BY stock_quantity ASC;
+
+SELECT category,
+       SUM(unit_price * stock_quantity) AS stock_value
+FROM products
+GROUP BY category
+ORDER BY stock_value DESC;</code></pre>
+<p><strong>Skills:</strong> numeric expressions, filtering and grouped totals. <strong>Extension:</strong> use a <code>CASE</code> expression to label stock as “Reorder” or “In stock”.</p>
+
+<h2>4. Online store order analysis</h2>
+<p><strong>Scenario:</strong> Create three related tables: <code>customers</code> (customer_id, customer_name), <code>orders</code> (order_id, customer_id, order_date, status) and <code>order_items</code> (order_item_id, order_id, product_name, quantity, unit_price).</p>
+<p><strong>Try these questions:</strong> What is the total value of each order? Which products generated the highest sales value? How many orders were placed by each customer?</p>
+<pre><code>SELECT o.order_id,
+       SUM(oi.quantity * oi.unit_price) AS order_total
+FROM orders AS o
+JOIN order_items AS oi ON oi.order_id = o.order_id
+GROUP BY o.order_id
+ORDER BY order_total DESC;
+
+SELECT oi.product_name,
+       SUM(oi.quantity * oi.unit_price) AS sales_value
+FROM order_items AS oi
+JOIN orders AS o ON o.order_id = oi.order_id
+WHERE o.status = 'completed'
+GROUP BY oi.product_name
+ORDER BY sales_value DESC;</code></pre>
+<p><strong>Skills:</strong> joining related tables, table aliases and aggregate calculations. <strong>Extension:</strong> include customer names and compare completed with cancelled orders. Decide clearly whether cancelled or refunded orders should count in your analysis.</p>
+
+<h2>5. Customer support ticket report</h2>
+<p><strong>Scenario:</strong> A support team stores tickets in a <code>tickets</code> table: ticket_id, category, priority, status, created_at and resolved_at.</p>
+<p><strong>Try these questions:</strong> How many tickets are open? Which categories receive the most tickets? Which high-priority tickets are still unresolved?</p>
+<pre><code>SELECT category, COUNT(*) AS ticket_count
+FROM tickets
+GROUP BY category
+ORDER BY ticket_count DESC;
+
+SELECT ticket_id, category, priority, created_at
+FROM tickets
+WHERE priority = 'high'
+  AND status &lt;&gt; 'resolved'
+ORDER BY created_at;</code></pre>
+<p><strong>Skills:</strong> multiple conditions, date columns and grouped reporting. <strong>Extension:</strong> calculate resolution time after checking the date-difference function supported by your database. Be explicit about time zones and tickets that have not yet been resolved.</p>
+
+<h2>6. Website activity overview</h2>
+<p><strong>Scenario:</strong> Use a synthetic <code>page_events</code> table with event_id, visitor_id, page_path, event_type and event_time. This is practice data—not a way to access another site's analytics.</p>
+<p><strong>Try these questions:</strong> Which pages received the most page-view events? How many distinct visitors generated events? Which event types were recorded?</p>
+<pre><code>SELECT page_path, COUNT(*) AS page_views
+FROM page_events
+WHERE event_type = 'page_view'
+GROUP BY page_path
+ORDER BY page_views DESC;
+
+SELECT event_type, COUNT(DISTINCT visitor_id) AS visitors
+FROM page_events
+GROUP BY event_type
+ORDER BY visitors DESC;</code></pre>
+<p><strong>Skills:</strong> filtering event records, grouping and distinct counts. <strong>Extension:</strong> compare daily activity using the date-extraction syntax for your database, and explain why an event count is not necessarily the same as a unique-user count.</p>
+
+<h2>7. Data quality audit</h2>
+<p><strong>Scenario:</strong> A dataset has missing product names, repeated IDs, negative quantities or inconsistent category labels. Before analysis, write queries that identify records needing review.</p>
+<p><strong>Try these questions:</strong> Which rows have missing required values? Are any IDs repeated? Are there quantities that should be checked?</p>
+<pre><code>SELECT *
+FROM products
+WHERE product_name IS NULL
+   OR product_name = '';
+
+SELECT product_id, COUNT(*) AS occurrences
+FROM products
+GROUP BY product_id
+HAVING COUNT(*) &gt; 1;
+
+SELECT *
+FROM order_items
+WHERE quantity &lt;= 0;</code></pre>
+<p><strong>Skills:</strong> <code>IS NULL</code>, grouping, duplicate detection and validation rules. <strong>Extension:</strong> write a short report that distinguishes confirmed errors from records that merely need human review. Do not delete or overwrite records until you understand the cause.</p>
+
+<h2>How to turn a SQL project into a portfolio example</h2>
+<ol><li><strong>State the question.</strong> Explain the real-world problem your project is meant to answer.</li><li><strong>Describe the data.</strong> List the tables, important columns, source and licence. If you created fictional data, say so.</li><li><strong>Show the queries.</strong> Include readable SQL, comments and a few representative results. Do not publish personal or confidential information.</li><li><strong>Explain the finding.</strong> Describe what the query shows and any limits in the data. Avoid claiming that a small sample proves a general trend.</li><li><strong>Make it reproducible.</strong> Include setup instructions, the database engine/version, schema and steps to run the queries.</li></ol>
+<div class="panel"><strong>A simple project README outline</strong>
+<pre><code># Project name
+## Question and goal
+## Dataset and licence
+## Tables and relationships
+## SQL concepts used
+## Queries and results
+## Limitations and next steps</code></pre></div>
+
+<h2>Where can you practise SQL for free?</h2>
+<ul><li><a href="https://sqlbolt.com/" target="_blank" rel="noopener">SQLBolt</a> — short interactive lessons and exercises for SELECT, filtering, joins and aggregates.</li>
+<li><a href="https://www.postgresql.org/docs/current/tutorial.html" target="_blank" rel="noopener">PostgreSQL official tutorial</a> — a hands-on introduction to relational database concepts, creating tables, querying, joins and aggregate functions.</li>
+<li><a href="https://www.sqlite.org/docs.html" target="_blank" rel="noopener">SQLite documentation</a> — documentation for a lightweight database engine that can be useful for local practice.</li></ul>
+<p class="note">The tools above are independent resources. Check their current terms, features and database compatibility before using them. SQL dialects differ; a query that works in one engine may need small changes in another.</p>
+
+<h2>Common questions</h2>
+<h3>Do I need to know programming before starting SQL?</h3>
+<p>No. You can begin with tables, columns and basic queries without knowing a general-purpose programming language. Understanding spreadsheets can help you picture rows and columns.</p>
+<h3>How many projects should a beginner complete?</h3>
+<p>Start with two or three projects you can explain clearly. A small project with sensible questions, readable queries and documented limitations is more useful than a long list of unfinished exercises.</p>
+<h3>Which SQL database should I use?</h3>
+<p>Choose one beginner-friendly environment and stay with it while learning the fundamentals. SQLite is lightweight; PostgreSQL is a widely used relational database with detailed official learning material. Follow the requirements of your course or target role if they specify a particular database.</p>
+<h3>Can these projects help me get a data analyst job?</h3>
+<p>They can help you practise and demonstrate SQL, but projects alone do not guarantee employment. Employers may also expect spreadsheet skills, data visualisation, communication, domain knowledge and experience with larger or messier datasets.</p>
+<h3>Should I put every query on GitHub?</h3>
+<p>You can publish a clean, well-documented project if the data licence permits it and the repository contains no secrets or personal information. Include setup instructions so another person can reproduce your work.</p>
+
+<div class="panel"><strong>Your next step</strong><p>Pick one project, write three questions you want the data to answer, and solve them with SQL. Then add one extension only after the basic queries work.</p></div>
+<p>If you are deciding whether SQL fits your learning path, read our guide to <a href="excel-sql-python.html">Excel vs SQL vs Python</a>. For a wider starting point, compare our <a href="best-free-coding-courses.html">free coding course guide</a>.</p>
+<div class="links"><a href="excel-sql-python.html">Excel vs SQL vs Python →</a><a href="best-free-coding-courses.html">Free coding courses →</a><a href="../">Back to CoursePilot</a></div>
+<p class="crumb">CoursePilot is an independent learning-guidance project. Some site links may be affiliate links; see our <a href="../#disclosure">affiliate disclosure</a>.</p>
+</main>
+<footer><div class="wrap">© CoursePilot · <a href="../">Home</a></div></footer>
+</body></html>
