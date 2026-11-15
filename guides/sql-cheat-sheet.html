@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SQL Cheat Sheet for Beginners | CoursePilot</title>
+<meta name="description" content="A practical SQL cheat sheet for beginners with SELECT, WHERE, JOIN, GROUP BY, INSERT, UPDATE, DELETE and common query examples.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://studentsphereglobal60.github.io/coursepilot/guides/sql-cheat-sheet.html">
+<meta name="theme-color" content="#090b10">
+<meta property="og:type" content="article"><meta property="og:title" content="SQL Cheat Sheet for Beginners"><meta property="og:description" content="Common SQL commands, clauses and examples in one beginner-friendly reference."><meta property="og:url" content="https://studentsphereglobal60.github.io/coursepilot/guides/sql-cheat-sheet.html">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"SQL Cheat Sheet for Beginners","description":"A practical reference to common SQL commands, clauses and examples.","mainEntityOfPage":{"@type":"WebPage","@id":"https://studentsphereglobal60.github.io/coursepilot/guides/sql-cheat-sheet.html"},"publisher":{"@type":"Organization","name":"CoursePilot","url":"https://studentsphereglobal60.github.io/coursepilot/"},"datePublished":"2026-11-15","dateModified":"2026-11-15"}
+</script>
+<style>
+:root{color-scheme:dark;--bg:#090b10;--panel:#11151e;--text:#f4f6fb;--muted:#a6afc0;--line:#283142;--accent:#8b7cff;--mint:#5de0c0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.75 system-ui,Arial,sans-serif}.wrap{width:min(820px,92%);margin:auto}header,footer{border-bottom:1px solid var(--line);padding:18px 0}footer{border-top:1px solid var(--line);border-bottom:0;margin-top:50px;color:var(--muted)}a{color:var(--mint)}.brand{font-weight:800;color:var(--text);text-decoration:none;font-size:1.2rem}.brand span{color:var(--accent)}main{padding:42px 0 20px}.crumb{color:var(--muted);font-size:.9rem}h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.15;letter-spacing:-1px;margin:16px 0}h2{margin-top:36px;line-height:1.3}h3{margin:24px 0 7px}p,li{color:#c4ccda}.intro{font-size:1.12rem;color:var(--muted)}.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin:24px 0}.tag{color:var(--mint);font-size:.8rem;text-transform:uppercase;letter-spacing:1px;font-weight:700}.note{font-size:.9rem;color:var(--muted)}pre{overflow-x:auto;background:#07090e;border:1px solid var(--line);border-radius:10px;padding:15px;color:#d9e1f2;font-size:.88rem;line-height:1.55}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.92rem}td,th{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}th{background:var(--panel)}.links{display:flex;gap:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="brand" href="../">Course<span>Pilot</span></a></div></header>
+<main class="wrap">
+<p class="crumb"><a href="../">Home</a> / Learning Guides / Data Analytics</p>
+<span class="tag">Data Analytics · Quick reference</span>
+<h1>SQL Cheat Sheet for Beginners</h1>
+<p class="intro">Keep the SQL commands you use most in one place. This beginner-friendly reference covers reading data, filtering, sorting, grouping, joining tables and changing records—with short examples you can adapt to your own practice database.</p>
+<div class="panel"><strong>Before using these examples</strong><ul>
+<li>Examples use broadly familiar SQL syntax. Small differences exist across SQLite, PostgreSQL, MySQL and SQL Server.</li>
+<li>Run queries on a practice database first. Back up important data before changing records.</li>
+<li>Use fictional or properly licensed sample data. Never publish private customer, student or employer records.</li>
+</ul></div>
+<h2>1. Basic SELECT queries</h2>
+<pre><code>-- Select every column
+SELECT * FROM customers;
+
+-- Select only the columns you need
+SELECT first_name, country
+FROM customers;
+
+-- Return unique values
+SELECT DISTINCT country
+FROM customers;
+
+-- Return a limited number of rows
+SELECT * FROM products
+LIMIT 10;</code></pre>
+<p><code>SELECT</code> chooses columns; <code>FROM</code> names the table. <code>DISTINCT</code> removes duplicate result rows. <code>LIMIT</code> is common in SQLite, PostgreSQL and MySQL; SQL Server uses different syntax.</p>
+<h2>2. Filter rows with WHERE</h2>
+<pre><code>-- Exact match
+SELECT * FROM customers
+WHERE country = 'Canada';
+
+-- Numeric comparison
+SELECT * FROM products
+WHERE price >= 25;
+
+-- Multiple conditions
+SELECT * FROM orders
+WHERE status = 'completed'
+  AND total_amount > 100;
+
+-- Match a range or a pattern
+SELECT * FROM orders
+WHERE order_date BETWEEN '2026-01-01' AND '2026-12-31';
+
+SELECT * FROM customers
+WHERE email LIKE '%@example.com';
+
+-- Check missing values
+SELECT * FROM customers
+WHERE phone IS NULL;</code></pre>
+<p>Common operators include <code>=</code>, <code>&lt;&gt;</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>AND</code>, <code>OR</code>, <code>IN</code>, <code>BETWEEN</code> and <code>LIKE</code>. Use <code>IS NULL</code>, not <code>= NULL</code>, to test for missing values.</p>
+<h2>3. Sort and rename result columns</h2>
+<pre><code>SELECT product_name,
+       price AS listed_price
+FROM products
+ORDER BY price DESC, product_name ASC;</code></pre>
+<p><code>AS</code> creates a readable column alias. <code>ORDER BY</code> sorts results: <code>ASC</code> is ascending and <code>DESC</code> is descending. If no direction is specified, ascending is commonly assumed.</p>
+<h2>4. Aggregate data with GROUP BY</h2>
+<pre><code>SELECT country,
+       COUNT(*) AS customer_count
+FROM customers
+GROUP BY country
+ORDER BY customer_count DESC;
+
+SELECT category,
+       ROUND(AVG(price), 2) AS average_price,
+       MIN(price) AS lowest_price,
+       MAX(price) AS highest_price
+FROM products
+GROUP BY category;
+
+-- Filter grouped results
+SELECT country, COUNT(*) AS customer_count
+FROM customers
+GROUP BY country
+HAVING COUNT(*) >= 5;</code></pre>
+<table><thead><tr><th>Function</th><th>What it does</th></tr></thead><tbody>
+<tr><td><code>COUNT(*)</code></td><td>Counts rows</td></tr><tr><td><code>SUM(column)</code></td><td>Adds numeric values</td></tr><tr><td><code>AVG(column)</code></td><td>Calculates an average</td></tr><tr><td><code>MIN(column)</code></td><td>Finds the smallest value</td></tr><tr><td><code>MAX(column)</code></td><td>Finds the largest value</td></tr></tbody></table>
+<p>Use <code>WHERE</code> to filter individual rows before grouping. Use <code>HAVING</code> to filter groups after aggregation.</p>
+<h2>5. JOIN tables together</h2>
+<pre><code>-- Keep only matching customers and orders
+SELECT c.customer_name, o.order_date, o.total_amount
+FROM customers AS c
+INNER JOIN orders AS o
+  ON c.customer_id = o.customer_id;
+
+-- Keep every customer, even without an order
+SELECT c.customer_name, o.order_id
+FROM customers AS c
+LEFT JOIN orders AS o
+  ON c.customer_id = o.customer_id;</code></pre>
+<p><code>INNER JOIN</code> returns rows with matching keys in both tables. <code>LEFT JOIN</code> keeps every row from the left table and fills unmatched right-side columns with NULL. Check your join keys and row counts to avoid accidental duplicate totals.</p>
+<h2>6. Add logic with CASE</h2>
+<pre><code>SELECT product_name, stock_quantity,
+  CASE
+    WHEN stock_quantity = 0 THEN 'Out of stock'
+    WHEN stock_quantity < 10 THEN 'Reorder'
+    ELSE 'In stock'
+  END AS stock_status
+FROM products;</code></pre>
+<p><code>CASE</code> evaluates conditions in order and returns the first matching result. It is useful for labels, categories and simple business rules.</p>
+<h2>7. Insert, update and delete records</h2>
+<pre><code>-- Add a row
+INSERT INTO customers (customer_name, country)
+VALUES ('Alex Morgan', 'Canada');
+
+-- Update selected rows
+UPDATE customers
+SET country = 'United States'
+WHERE customer_id = 42;
+
+-- Delete selected rows
+DELETE FROM customers
+WHERE customer_id = 42;</code></pre>
+<div class="panel"><strong>Important safety rule</strong><p>Never run <code>UPDATE</code> or <code>DELETE</code> without checking the <code>WHERE</code> condition. Without it, every row may be changed or deleted. Practise on a disposable copy and use transactions when supported.</p></div>
+<h2>8. Create a simple table</h2>
+<pre><code>CREATE TABLE tasks (
+  task_id INTEGER PRIMARY KEY,
+  task_name VARCHAR(100) NOT NULL,
+  is_complete BOOLEAN DEFAULT FALSE
+);</code></pre>
+<p><code>CREATE TABLE</code> defines a table. Common constraints include <code>PRIMARY KEY</code>, <code>NOT NULL</code>, <code>UNIQUE</code> and <code>DEFAULT</code>. Data types and auto-generated key syntax vary by database engine.</p>
+<h2>9. SQL query order: a quick memory aid</h2>
+<p>A typical query is written in this order:</p>
+<pre><code>SELECT column_name, COUNT(*)
+FROM table_name
+JOIN another_table ON ...
+WHERE row_condition
+GROUP BY column_name
+HAVING COUNT(*) > 1
+ORDER BY column_name DESC
+LIMIT 10;</code></pre>
+<p>The database's logical processing order is broadly: <code>FROM</code>/<code>JOIN</code>, <code>WHERE</code>, <code>GROUP BY</code>, <code>HAVING</code>, <code>SELECT</code>, <code>ORDER BY</code>, then row limiting. This helps explain why a SELECT alias is not available in every earlier clause.</p>
+<h2>Free ways to practise SQL</h2>
+<ul>
+<li><a href="https://sqlbolt.com/" target="_blank" rel="noopener">SQLBolt</a> — interactive lessons for learning core SQL statements.</li>
+<li><a href="https://www.sqlite.org/docs.html" target="_blank" rel="noopener">SQLite documentation</a> — reference material for SQLite syntax and features.</li>
+<li><a href="https://www.postgresql.org/docs/current/tutorial.html" target="_blank" rel="noopener">PostgreSQL tutorial</a> — official introduction to relational databases and SQL.</li>
+</ul>
+<h2>Common beginner questions</h2>
+<h3>What are the most important SQL commands to learn first?</h3>
+<p>Start with <code>SELECT</code>, <code>FROM</code>, <code>WHERE</code>, <code>ORDER BY</code> and <code>LIMIT</code>. Then learn <code>GROUP BY</code>, aggregate functions and <code>JOIN</code>. Practise data changes only after you understand safe filtering.</p>
+<h3>Is SQL the same in every database?</h3>
+<p>No. Core ideas are shared, but date functions, data types, limiting rows, generated IDs and some advanced features differ. Check the documentation for the database you are using.</p>
+<h3>How do I practise after reading this cheat sheet?</h3>
+<p>Try our <a href="sql-projects-for-beginners.html">seven beginner SQL projects</a> and write your own questions for each dataset. For a wider learning plan, compare <a href="excel-sql-python.html">Excel, SQL and Python</a>.</p>
+<h2>Keep learning</h2>
+<p>A cheat sheet is a quick reminder, not a substitute for practice. Choose a small dataset, predict what a query should return, run it and check the result. For a structured overview of beginner learning options, see our <a href="best-free-coding-courses.html">free coding courses guide</a>.</p>
+<div class="links"><a href="sql-projects-for-beginners.html">Practise with SQL projects →</a><a href="excel-sql-python.html">Compare data skills →</a><a href="../">Back to CoursePilot</a></div>
+<p class="crumb">CoursePilot is an independent learning-guidance project. Some site links may be affiliate links; see our <a href="../#disclosure">affiliate disclosure</a>.</p>
+</main><footer><div class="wrap">© CoursePilot · <a href="../">Home</a></div></footer>
+</body></html>
