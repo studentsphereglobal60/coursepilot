@@ -12,7 +12,7 @@
 <meta property="og:description" content="Seven practical SQL projects with learning goals, example queries and portfolio tips for beginners.">
 <meta property="og:url" content="https://studentsphereglobal60.github.io/coursepilot/guides/sql-projects-for-beginners.html">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Article","headline":"7 SQL Projects for Beginners","description":"Seven practical SQL projects with learning goals, example queries and portfolio tips for beginners.","mainEntityOfPage":{"@type":"WebPage","@id":"https://studentsphereglobal60.github.io/coursepilot/guides/sql-projects-for-beginners.html"},"publisher":{"@type":"Organization","name":"CoursePilot","url":"https://studentsphereglobal60.github.io/coursepilot/"},"datePublished":"2026-11-15","dateModified":"2026-11-15"}
+{"@context":"https://schema.org","@type":"Article","headline":"7 SQL Projects for Beginners","description":"Seven practical SQL projects with learning goals, example queries and portfolio tips for beginners.","mainEntityOfPage":{"@type":"WebPage","@id":"https://studentsphereglobal60.github.io/coursepilot/guides/sql-projects-for-beginners.html"},"publisher":{"@type":"Organization","name":"CoursePilot","url":"https://studentsphereglobal60.github.io/coursepilot/"},"datePublished":"2026-11-15","dateModified":"2026-11-24"}
 </script>
 <style>
 :root{color-scheme:dark;--bg:#090b10;--panel:#11151e;--text:#f4f6fb;--muted:#a6afc0;--line:#283142;--accent:#8b7cff;--mint:#5de0c0}
@@ -42,6 +42,57 @@
 <tr><td>6. Website activity</td><td>Filtering, grouping, joins</td><td>Understand visits and events</td></tr>
 <tr><td>7. Data quality audit</td><td>NULL, duplicates, validation</td><td>Find records needing review</td></tr>
 </tbody></table>
+
+<h2>Quick start: create a small practice database</h2>
+<p>You can run this starter dataset before attempting the projects. It creates a tiny library database with fictional books and loan records, so you can practise real queries instead of working only from table descriptions. The examples use SQLite-compatible SQL.</p>
+<pre><code>CREATE TABLE books (
+  book_id INTEGER PRIMARY KEY,
+  title TEXT NOT NULL,
+  author TEXT NOT NULL,
+  category TEXT,
+  published_year INTEGER
+);
+
+CREATE TABLE loans (
+  loan_id INTEGER PRIMARY KEY,
+  book_id INTEGER NOT NULL,
+  member_name TEXT NOT NULL,
+  loan_date TEXT NOT NULL,
+  return_date TEXT,
+  FOREIGN KEY (book_id) REFERENCES books(book_id)
+);
+
+INSERT INTO books VALUES
+(1, 'The Blue Planet', 'A. Morgan', 'Science', 2018),
+(2, 'Small Data Stories', 'R. Chen', 'Technology', 2021),
+(3, 'Learning SQL', 'M. Patel', 'Technology', 2020),
+(4, 'The Quiet Garden', 'L. James', 'Nature', 2016),
+(5, 'Numbers at Work', 'S. Ali', 'Business', 2023);
+
+INSERT INTO loans VALUES
+(1, 1, 'Member A', '2026-10-02', '2026-10-12'),
+(2, 2, 'Member B', '2026-10-05', NULL),
+(3, 3, 'Member A', '2026-10-08', NULL),
+(4, 4, 'Member C', '2026-10-10', '2026-10-18');</code></pre>
+<p>Try these queries after creating the tables:</p>
+<pre><code>-- Books currently on loan
+SELECT b.title, l.member_name, l.loan_date
+FROM books AS b
+JOIN loans AS l ON l.book_id = b.book_id
+WHERE l.return_date IS NULL;
+
+-- Number of books in each category
+SELECT category, COUNT(*) AS book_count
+FROM books
+GROUP BY category
+ORDER BY book_count DESC;
+
+-- Books published since 2020
+SELECT title, author, published_year
+FROM books
+WHERE published_year &gt;= 2020
+ORDER BY published_year DESC;</code></pre>
+<p class="note">The names and records above are fictional practice data. In SQLite, enable foreign-key enforcement with <code>PRAGMA foreign_keys = ON;</code> before inserting records if you want the database to enforce the relationship.</p>
 
 <h2>1. Personal library database</h2>
 <p><strong>Scenario:</strong> A small community library wants to keep track of books and which members have borrowed them. Create two tables: <code>books</code> (book_id, title, author, category, published_year) and <code>loans</code> (loan_id, book_id, member_name, loan_date, return_date).</p>
